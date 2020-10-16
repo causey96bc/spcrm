@@ -1,8 +1,6 @@
 <script lang="ts">
-  //
+  import { Router } from "@sveltech/routify";
+  import { routes } from "@sveltech/routify/tmp/routes";
 </script>
 
-<main>
-  <h1>CRM</h1>
-  <p>The CRM app.</p>
-</main>
+<Router {routes} />
