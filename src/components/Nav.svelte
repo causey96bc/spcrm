@@ -42,6 +42,10 @@
   .user-info {
     display: flex;
   }
+  .user-info > * {
+    margin: 0.25em;
+    place-self: center;
+  }
 </style>
 
 <nav>
@@ -54,8 +58,8 @@
   </ul>
   <div class="user-info">
     <span>{$user.displayName}</span>
-    <SignOut />
     <!-- svelte-ignore a11y-img-redundant-alt -->
     <img src={$user.photoURL} alt="user image" />
+    <SignOut />
   </div>
 </nav>
