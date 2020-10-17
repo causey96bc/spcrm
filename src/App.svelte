@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Router } from "@sveltech/routify";
   import { routes } from "@sveltech/routify/tmp/routes";
-  import { user } from "./components/firebase/auth";
+  import { user } from "./components/firebase";
   import SignIn from "./components/firebase/SignIn.svelte";
 </script>
 

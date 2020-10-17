@@ -1,6 +1,6 @@
 <script>
   import { layout, isActive } from "@sveltech/routify";
-  import { user } from "./firebase/auth";
+  import { user } from "./firebase";
   import SignOut from "./firebase/SignOut.svelte";
 </script>
 
