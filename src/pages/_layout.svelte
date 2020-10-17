@@ -1,20 +1,13 @@
 <script>
   import { page } from "@sveltech/routify";
+  import { user } from "../components/firebase/auth";
+  import SignIn from "../components/firebase/SignIn.svelte";
   import Nav from "../components/Nav.svelte";
 </script>
 
-<style>
-  .container {
-    max-width: 960px;
-    margin: 0 auto;
-  }
-</style>
+<Nav />
+<h1>{$page.title}</h1>
 
-<div class="container">
-  <Nav />
-  <h1>{$page.title}</h1>
-
-  <main>
-    <slot />
-  </main>
-</div>
+<main>
+  <slot />
+</main>

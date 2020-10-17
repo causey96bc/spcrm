@@ -1,9 +1,13 @@
 <script>
   import { layout, isActive } from "@sveltech/routify";
+  import { user } from "./firebase/auth";
+  import SignOut from "./firebase/SignOut.svelte";
 </script>
 
 <style>
   nav {
+    display: flex;
+    justify-content: space-between;
     background-color: black;
     color: white;
     padding: 0.5em;
@@ -31,6 +35,13 @@
   li.active {
     font-weight: bold;
   }
+  img {
+    max-width: 32px;
+    max-height: 32px;
+  }
+  .user-info {
+    display: flex;
+  }
 </style>
 
 <nav>
@@ -41,4 +52,10 @@
       </li>
     {/each}
   </ul>
+  <div class="user-info">
+    <span>{$user.displayName}</span>
+    <SignOut />
+    <!-- svelte-ignore a11y-img-redundant-alt -->
+    <img src={$user.photoURL} alt="user image" />
+  </div>
 </nav>

@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "@sveltech/routify": "^1.9.9",
+    "firebase": "^7.24.0",
     "sirv-cli": "^1.0.0"
   }
 }
