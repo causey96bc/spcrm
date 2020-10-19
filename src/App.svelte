@@ -5,14 +5,14 @@
   import SignIn from "./components/firebase/SignIn.svelte";
 </script>
 
-<style>
+<!--<style>
   .container {
-    max-width: 960px;
+    max-width: 1365px;
     margin: 0 auto;
   }
-</style>
+</style>-->
 
-<div class="container">
+<div class="container-fluid">
   {#if $user}
     <Router {routes} />
   {:else}

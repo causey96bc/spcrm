@@ -48,7 +48,7 @@
   }
 </style>
 
-<nav>
+<nav class="container-fluid">
   <ul>
     {#each $layout.children as link}
       <li class:active={$isActive(link.path)}>
