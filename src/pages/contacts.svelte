@@ -1,14 +1,12 @@
 <script>
   import { url } from "@sveltech/routify";
   import { getUserDoc, user } from "../components/firebase";
-  const CONTACT = { name: "", email: "", details: "" };
+  export const CONTACT = { name: "", email: "", details: "" };
   let contact = { ...CONTACT };
   let contacts = [];
   let selected = {};
   const userDoc = getUserDoc($user.uid);
-  const contactsCollection = userDoc
-    .collection("contacts")
-    .orderBy("name", "asc");
+  const contactsCollection = userDoc.collection("contacts");
   contactsCollection.onSnapshot((snapshot) => {
     contacts = snapshot.docs.map((doc) => [doc.id, doc.data()]);
   });
@@ -40,7 +38,7 @@
         <div class="row">
           <div class="col-md-3">
             <div class="">
-              <input type="checkbox" />
+              <input bind:value={selected} type="checkbox" />
               <h6 class="d-inline-block ml-2">Name</h6>
             </div>
           </div>
@@ -128,7 +126,7 @@
 
             </div>
             <!--Grid row-->
-            <button type="submit">Save</button>
+            <button on:submit={submit} type="submit">Save</button>
         </form>
     </div>
         <!--Grid column-->
