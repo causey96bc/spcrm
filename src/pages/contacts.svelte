@@ -2,6 +2,7 @@
   import { url } from "@sveltech/routify";
   import { getUserDoc, user } from "../components/firebase";
   export const CONTACT = { name: "", email: "", details: "" };
+  let contactId = null;
   let contact = { ...CONTACT };
   let contacts = [];
   let selected = {};
@@ -11,8 +12,18 @@
     contacts = snapshot.docs.map((doc) => [doc.id, doc.data()]);
   });
   async function submit() {
-    contactsCollection.add(contact);
+    if (contactId) {
+      await contactsCollection.doc(contactId).update(contact);
+    } else {
+      await contactsCollection.add(contact);
+    }
     contact = { ...CONTACT };
+    contactId = null;
+  }
+  async function loadContact(id) {
+    const snapshot = await userDoc.collection("contacts").doc(id).get();
+    contactId = snapshot.id;
+    contact = snapshot.data();
   }
 </script>
 
@@ -65,7 +76,7 @@
               <p>{c.details}</p>
             </div>
             <div class="col-md-3">
-              <a href={$url('./:id/edit', { id })}>edit</a>
+              <a on:click={() => loadContact(id)}>edit</a>
               <a href={$url('./:id/delete', { id })}>delete</a>
             </div>
           </div>
