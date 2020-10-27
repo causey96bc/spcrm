@@ -1,8 +1,6 @@
 <script lang="ts">
   import { Router } from "@sveltech/routify";
   import { routes } from "@sveltech/routify/tmp/routes";
-  import { user } from "./components/firebase";
-  import SignIn from "./components/firebase/SignIn.svelte";
 </script>
 
 <!--<style>
@@ -12,11 +10,6 @@
   }
 </style>-->
 
-<div class="container-fluid">
-  {#if $user}
-    <Router {routes} />
-  {:else}
-    <SignIn />
-    <p>This is a CRM application, you must sign in to access features.</p>
-  {/if}
+<div class="container">
+  <Router {routes} />
 </div>

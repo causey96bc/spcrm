@@ -1,16 +1,25 @@
 <script>
   import { url } from "@sveltech/routify";
   import { getUserDoc, user } from "../components/firebase";
+  export let id;
   export const CONTACT = { name: "", email: "", details: "" };
   let contactId = null;
   let contact = { ...CONTACT };
   let contacts = [];
-  let selected = {};
-  const userDoc = getUserDoc($user.uid);
-  const contactsCollection = userDoc.collection("contacts");
-  contactsCollection.onSnapshot((snapshot) => {
-    contacts = snapshot.docs.map((doc) => [doc.id, doc.data()]);
-  });
+  let selected = [];
+  $: {
+    console.log("selected", selected.filter(Boolean));
+  }
+
+  $: if ($user) {
+    const userDoc = getUserDoc($user.uid);
+    const contactsCollection = userDoc.collection("contacts");
+    if (contactsCollection) {
+      contactsCollection.onSnapshot((snapshot) => {
+        contacts = snapshot.docs.map((doc) => [doc.id, doc.data()]);
+      });
+    }
+  }
   async function submit() {
     if (contactId) {
       await contactsCollection.doc(contactId).update(contact);
@@ -66,7 +75,7 @@
         {#each contacts as [id, c] (id)}
           <div class="row divider">
             <div class="col-md-3">
-              <input type="checkbox" bind:checked={selected[id]} />
+              <input type="checkbox" bind:group={selected} value={id} />
               <p class="d-inline-block ml-2">{c.name}</p>
             </div>
             <div class="col-md-3">
@@ -78,6 +87,7 @@
             <div class="col-md-3">
               <a on:click={() => loadContact(id)}>edit</a>
               <a href={$url('./:id/delete', { id })}>delete</a>
+              <a href={$url('./:id/email', { id })}>send email</a>
             </div>
           </div>
         {:else}
@@ -86,6 +96,9 @@
           </tr>
         {/each}
       </div>
+      {#if selected.length > 0}
+        <a href={`./email/${selected.join(',')}`}>Send email</a>
+      {/if}
     </section>
 
     <section class="col-4">

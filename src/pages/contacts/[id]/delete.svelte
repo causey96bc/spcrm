@@ -1,5 +1,6 @@
 <script>
     export let id;
+    import "firebase/app";
     import { user, getUserDoc } from "../../../components/firebase";
     let contact = {};
     const userDoc = getUserDoc($user.uid);

@@ -1,6 +1,7 @@
 <script>
   import { layout, isActive } from "@sveltech/routify";
   import { user } from "./firebase";
+  import SignIn from "./firebase/SignIn.svelte";
   import SignOut from "./firebase/SignOut.svelte";
 </script>
 
@@ -35,16 +36,13 @@
   li.active {
     font-weight: bold;
   }
-  img {
-    max-width: 32px;
-    max-height: 32px;
-  }
   .user-info {
     display: flex;
   }
   .user-info > * {
     margin: 0.25em;
     place-self: center;
+    height: 32px;
   }
 </style>
 
@@ -57,9 +55,15 @@
     {/each}
   </ul>
   <div class="user-info">
-    <span>{$user.displayName}</span>
-    <!-- svelte-ignore a11y-img-redundant-alt -->
-    <img src={$user.photoURL} alt="user image" />
-    <SignOut />
+    {#if $user}
+      <span>{$user.displayName}</span>
+      <!-- svelte-ignore a11y-img-redundant-alt -->
+      <img src={$user.photoURL} alt="user image" />
+      <SignOut />
+    {:else}
+      <!-- empty DIV just to give full height to the SignIn component next to it -->
+      <div />
+      <SignIn />
+    {/if}
   </div>
 </nav>
