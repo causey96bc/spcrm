@@ -4,18 +4,6 @@
     import firebase from "firebase/app";
     export let id;
     const selected = id.split(",");
-    const userDoc = getUserDoc($user.uid);
-    // const contactRef = firebase
-    //     .firestore()
-    //     .collection("users")
-    //     .doc($user.uid)
-    //     .collection("contacts")
-    //     .doc(selected[0]);
-
-    // contactRef.get().then(function (doc) {
-    //     console.log("doc", doc.data());
-    // });
-
     const contactsPromise = Promise.all(
         selected.map(async (id) => {
             const snapshot = await firebase
@@ -28,18 +16,6 @@
             return snapshot.data();
         })
     );
-
-    // const contactArr = contacts.reduce((acc, contact) => {
-    //     let { id } = contact;
-    //     return { ...acc, id };
-    // });
-    // console.log("contactArr", contactArr);
-    // async function getContact() {
-    //     const snapshot = await contacts.get(contactArr);
-    //     console.log("snapshot", snapshot);
-    //     const contact = snapshot.data();
-    //     return contact;
-    // }
 </script>
 
 <!-- routify:options title="Emails" -->
@@ -51,4 +27,4 @@
 {/await}
 My email interactions.
 
-<GMail />
+<GMail {contactsPromise} />

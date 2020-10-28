@@ -1,7 +1,9 @@
+const Handlebars = require("handlebars");
+const template = Handlebars.compile("Name: {{name}}");
+console.log(template({ name: "Nils" }));
 import firebaseConfig from "../firebase/config";
-
 export { init(firebaseConfig.apiKey, firebaseConfig.clientId)};
-
+console.log("hello")
 export default async function init(apiKey, clientId) {
   const DISCOVERY_DOCS = [
     "https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest",

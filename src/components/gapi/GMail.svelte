@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { sendMail } from "../gapi/index";
+  import { sendMail } from "./index";
   import { getUserDoc, user } from "../firebase/index";
   const userDoc = getUserDoc($user.uid);
   const contactRef = userDoc.collection("contacts").doc("vq45VImmyOXxOodx3VmF");
