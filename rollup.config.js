@@ -6,7 +6,8 @@ import { terser } from "rollup-plugin-terser";
 import sveltePreprocess from "svelte-preprocess";
 import typescript from "@rollup/plugin-typescript";
 import { routify } from "@sveltech/routify";
-
+import json from '@rollup/plugin-json';
+import nodePolyfills from 'rollup-plugin-node-polyfills';
 const production = !process.env.ROLLUP_WATCH;
 
 function serve() {
@@ -49,6 +50,7 @@ export default {
       singleBuild: production,
       dynamicImports: true,
     }),
+    json(),
     svelte({
       // enable run-time checks when not in production
       dev: !production,
@@ -66,8 +68,12 @@ export default {
     // consult the documentation for details:
     // https://github.com/rollup/plugins/tree/master/packages/commonjs
     resolve({
-      browser: true,
+      browser: "true",
+      ignore: ["fs"],
       dedupe: ["svelte"],
+      preferBuiltins: true,
+      jsnext: true,
+      main: true,
     }),
     commonjs(),
     typescript({

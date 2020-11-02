@@ -30,6 +30,7 @@
     contactId = null;
   }
   async function loadContact(id) {
+    const userDoc = await getUserDoc($user.uid);
     const snapshot = await userDoc.collection("contacts").doc(id).get();
     contactId = snapshot.id;
     contact = snapshot.data();
@@ -87,7 +88,6 @@
             <div class="col-md-3">
               <a on:click={() => loadContact(id)}>edit</a>
               <a href={$url('./:id/delete', { id })}>delete</a>
-              <a href={$url('./:id/email', { id })}>send email</a>
             </div>
           </div>
         {:else}

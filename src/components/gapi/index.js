@@ -1,8 +1,6 @@
-const Handlebars = require("handlebars");
-const template = Handlebars.compile("Name: {{name}}");
-console.log(template({ name: "Nils" }));
+
 import firebaseConfig from "../firebase/config";
-export { init(firebaseConfig.apiKey, firebaseConfig.clientId)};
+export let i = init(firebaseConfig.apiKey, firebaseConfig.clientId);
 console.log("hello")
 export default async function init(apiKey, clientId) {
   const DISCOVERY_DOCS = [
