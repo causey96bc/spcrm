@@ -22,12 +22,14 @@ export default async function init(apiKey, clientId) {
 
 export async function sendMail(to, subject, body) {
   const gapi = window.gapi;
-  const message = `To: ${to}
+  let message = `To: ${to}
 Subject: ${subject}
 Content-type: text/html
 ${body}`;
   // The body needs to be base64url encoded.
   const encodedMessage = btoa(message);
+  message.attach(encodedMessage)
+  let {content_type, encoding} = mimetypes.guess_type(file) 
   const urlSafeEncodedMessage = encodedMessage
     .replace(/\+/g, "-")
     .replace(/\//g, "_")
