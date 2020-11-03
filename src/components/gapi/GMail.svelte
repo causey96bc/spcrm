@@ -23,8 +23,45 @@
 </script>
 
 <style>
+  legend {
+    text-align: initial;
+  }
+  .email-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    border-radius: 5%;
+    width: 500px;
+    height: 500px;
+    padding: 10px;
+    box-shadow: 5px 6px 6px 6px #888888;
+  }
+
   fieldset > * {
     display: block;
+  }
+  input {
+    width: 255px;
+    margin-bottom: 10px;
+    margin: auto;
+  }
+  textarea {
+    width: 400px;
+  }
+
+  p {
+    margin-top: 12px;
+  }
+
+  button {
+    margin: auto;
+    margin-top: 12px;
+    width: 75px;
+    height: 30px;
+    border-radius: 10%;
+    background-color: rgb(3, 170, 236);
+    color: white;
+    font-size: 16px;
   }
 </style>
 
