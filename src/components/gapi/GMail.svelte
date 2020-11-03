@@ -1,8 +1,22 @@
 <script>
+  import firebase from "firebase/app";
   import { onMount } from "svelte";
   import { sendMail } from "./index";
   import { getUserDoc, user } from "../firebase/index";
   import i from "./index";
+  export let files = [];
+  $: {
+    console.log("files", files);
+    const [file] = files;
+    if (file) {
+      file.arrayBuffer().then((ab) => {
+      const b64 = btoa(new Uint8Array(ab));
+      console.log("b64", b64);
+    });
+    //   const ref = firebase.storage().ref(`test/${file.name}`);
+    //   ref.put(file);
+    }
+  }
   const userDoc = getUserDoc($user.uid);
   const contactRef = userDoc.collection("contacts").doc("vq45VImmyOXxOodx3VmF");
   async function getContact() {
@@ -71,6 +85,7 @@
     <input bind:value={to} placeholder="'to' email address" required />
     <input bind:value={subject} placeholder="email 'subject'" required />
     <textarea bind:value={body} rows="5" />
+    <input type="file" bind:files multiple />
     <button type="submit">Send</button>
   </fieldset>
 </form>

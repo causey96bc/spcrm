@@ -5,7 +5,8 @@ import MIMEAudio from "mime";
 import MIMEImage from "mime";
 import MIMEMultipart from "mime";
 import MIMEBase from "mime";
-
+// import file from "./GMail.svelte"
+// console.log("selected files", file);
 import firebaseConfig from "../firebase/config";
 export let i = init(firebaseConfig.apiKey, firebaseConfig.clientId);
 console.log("hello")
@@ -32,6 +33,7 @@ export async function sendMail(to, subject, body) {
   let message = `To: ${to}
 Subject: ${subject}
 Content-type: text/html
+
 ${body}`;
   // The body needs to be base64url encoded.
   const encodedMessage = btoa(message);
@@ -44,7 +46,10 @@ ${body}`;
   const send = await gapi.client.gmail.users.messages.send({
     userId: "me",
     resource: {
-      raw: urlSafeEncodedMessage,
+      //   raw: urlSafeEncodedMessage,
+      "payload": {
+
+      }
     },
   });
   console.log("send", send);

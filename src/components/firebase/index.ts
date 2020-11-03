@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/auth"; //for side effects
 import "firebase/firestore"; //for side effects
+import "firebase/storage"; //for side effects
 import { readable } from "svelte/store";
 import firebaseConfig from "./config.js";
 
