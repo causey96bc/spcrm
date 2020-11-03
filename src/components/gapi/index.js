@@ -5,11 +5,7 @@ import MIMEAudio from "mime";
 import MIMEImage from "mime";
 import MIMEMultipart from "mime";
 import MIMEBase from "mime";
-// from email.mime.image import MIMEImage
-// from email.mime.multipart import MIMEMultipart
-// from email.mime.audio import MIMEAudio
-// from email.mime.base import MIMEBase
-// import mimetypes
+
 import firebaseConfig from "../firebase/config";
 export let i = init(firebaseConfig.apiKey, firebaseConfig.clientId);
 console.log("hello")
