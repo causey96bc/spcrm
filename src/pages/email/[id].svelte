@@ -25,6 +25,6 @@
         <h2>{contact.name}</h2>
     {/each}
 {/await}
-My email interactions.
+
 
 <GMail {contactsPromise} />

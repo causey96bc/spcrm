@@ -13,6 +13,7 @@
     color: white;
     padding: 0.5em;
   }
+  
 
   nav ul {
     display: flex;

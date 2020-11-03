@@ -46,6 +46,32 @@
     margin-bottom: 10px;
     padding-bottom: 10px;
   }
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  h2 {
+    font-weight: bold;
+    font-size: 28px;
+    margin-bottom: 28px;
+    margin-top: 30px;
+  }
+
+  .col-4 {
+    margin-top:28px;
+  }
+
+  .col-8 {
+    margin-top: 20px;
+    padding-top: 2px;
+    margin-left: -85px;
+  }
+  .text {
+    margin-top: 40px;
+    text-align: center;
+
+  }
 </style>
 
 <!-- routify:options index=2 -->
@@ -54,7 +80,7 @@
   <div class="row">
     <section class="col-8">
       <div>
-        <h3>My Current contacts</h3>
+        <h2>My Current contacts</h2>
 
         <div class="row">
           <div class="col-md-3">
@@ -86,14 +112,17 @@
               <p>{c.details}</p>
             </div>
             <div class="col-md-3">
-              <a on:click={() => loadContact(id)}>edit</a>
-              <a href={$url('./:id/delete', { id })}>delete</a>
+              <a on:click={() => loadContact(id)}><i
+                  class="fas fa-user-edit" /></a>
+              <a href={$url('./:id/delete', { id })}><i
+                  class="far fa-trash-alt" />
+              </a>
             </div>
           </div>
         {:else}
-          <tr>
-            <td colspan="3">You have no contacts. Please add some.</td>
-          </tr>
+          <p class="text">
+            You have no contacts. Please add some.
+          </p>
         {/each}
       </div>
       {#if selected.length > 0}
