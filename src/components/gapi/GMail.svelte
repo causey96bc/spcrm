@@ -3,20 +3,7 @@
   import { onMount } from "svelte";
   import { sendMail } from "./index";
   import { getUserDoc, user } from "../firebase/index";
-  import i from "./index";
   export let files = [];
-  $: {
-    console.log("files", files);
-    const [file] = files;
-    if (file) {
-      file.arrayBuffer().then((ab) => {
-      const b64 = btoa(new Uint8Array(ab));
-      console.log("b64", b64);
-    });
-    //   const ref = firebase.storage().ref(`test/${file.name}`);
-    //   ref.put(file);
-    }
-  }
   const userDoc = getUserDoc($user.uid);
   const contactRef = userDoc.collection("contacts").doc("vq45VImmyOXxOodx3VmF");
   async function getContact() {
@@ -28,10 +15,8 @@
   let to = "",
     subject = "test 1",
     body = "line 1\nline 2";
-  import firebaseConfig from "../firebase/config";
 
   onMount(async () => {
-    await i(firebaseConfig.apiKey, firebaseConfig.clientId);
     await getContact();
   });
 </script>

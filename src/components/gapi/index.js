@@ -8,7 +8,7 @@ import MIMEBase from "mime";
 // import file from "./GMail.svelte"
 // console.log("selected files", file);
 import firebaseConfig from "../firebase/config";
-export let i = init(firebaseConfig.apiKey, firebaseConfig.clientId);
+init(firebaseConfig.apiKey, firebaseConfig.clientId);
 console.log("hello")
 export default async function init(apiKey, clientId) {
   const DISCOVERY_DOCS = [
