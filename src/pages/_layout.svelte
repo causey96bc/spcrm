@@ -1,18 +1,20 @@
 <script>
   import { page } from "@sveltech/routify";
+  import { user } from "../components/firebase";
   import Nav from "../components/Nav.svelte";
 </script>
 
 <style>
   main {
     display: flex;
-    justify-content:space-evenly;
+    justify-content: space-evenly;
   }
 </style>
-
 
 <Nav />
 <!-- <h1>{$page.title}</h1> -->
 <main>
-  <slot />
+  {#if $user}
+    <slot />
+  {/if}
 </main>
