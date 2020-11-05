@@ -1,5 +1,6 @@
 <script>
   import { page } from "@sveltech/routify";
+  import { user } from "../components/firebase";
   import Nav from "../components/Nav.svelte";
 </script>
 
@@ -7,5 +8,7 @@
 <h1>{$page.title}</h1>
 
 <main>
-  <slot />
+  {#if $user}
+    <slot />
+  {/if}
 </main>
