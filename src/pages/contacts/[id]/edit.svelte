@@ -1,26 +1,54 @@
 <script>
   export let id;
-  import { getUserDoc } from "../../../components/firebase";
+  import {
+    getContactPicture,
+    getUserDoc,
+    uploadContactPicture,
+  } from "../../../components/firebase";
   const userDoc = getUserDoc();
+  let files = [];
+  $: console.log("files", files);
   let contact = null;
-  userDoc
-    .collection("contacts")
-    .doc(id)
-    .get()
-    .then((doc) => {
-      contact = doc.data();
-    });
+  const contactRef = userDoc.collection("contacts").doc(id);
+  contactRef.get().then((snapshot) => {
+    contact = snapshot.data();
+  });
+  async function save() {
+    const [file] = files;
+    if (file) {
+      await uploadContactPicture(id, file);
+      contact.picture = true;
+    }
+    await contactRef.set(contact);
+    history.back();
+  }
 </script>
+
+<style>
+</style>
 
 <!-- routify:options title="Edit Contact" -->
 
 {#if contact}
-  <form>
+  <form on:submit|preventDefault={save}>
     <div class="form-group">
-      <input class="form-control" bind:value={contact.name} />
+      <input bind:value={contact.name} class="form-control" />
     </div>
     <div class="form-group">
-      <input class="form-control" bind:value={contact.email} type="email" />
+      <input bind:value={contact.email} type="email" class="form-control" />
+    </div>
+    <div class="form-group">
+      <input bind:files type="file" accept="image/jpeg" multiple={false} />
+      {#if files.length > 0}
+        <img
+          src={URL.createObjectURL(files[0])}
+          alt="contact picture"
+          class="img-fluid" />
+      {:else if contact.picture}
+        {#await getContactPicture(id) then url}
+          <img src={url} alt="contact picture" class="img-fluid" />
+        {/await}
+      {/if}
     </div>
     <button class="btn btn-primary">
       <i class="material-icons">save</i>
