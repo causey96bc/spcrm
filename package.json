@@ -10,12 +10,17 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
+    "deploy": "firebase deploy --only hosting",
     "start": "sirv public --single",
     "validate": "svelte-check"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^11.0.0",
+<<<<<<< HEAD
     "@rollup/plugin-node-resolve": "^10.0.0",
+=======
+    "@rollup/plugin-node-resolve": "^8.0.0",
+>>>>>>> 90f66b7bf30e914ba97d53eea10885c35722147d
     "@rollup/plugin-typescript": "^6.0.0",
     "@tsconfig/svelte": "^1.0.0",
     "@types/ejs": "^3.0.5",
