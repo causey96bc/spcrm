@@ -13,7 +13,6 @@
     color: white;
     padding: 0.5em;
   }
-  
 
   nav ul {
     display: flex;
@@ -21,25 +20,31 @@
     padding-inline-start: 0;
     margin: 0;
   }
+
   nav ul li {
     margin: auto 1em;
     padding: auto 1em;
   }
+
   nav ul li a {
     font-family: Arial, Helvetica, sans-serif;
     color: white;
     text-decoration: none;
   }
+
   nav ul li:first-child {
     padding-inline-start: 0;
     margin-inline-start: 0;
   }
+
   li.active {
     font-weight: bold;
   }
+
   .user-info {
     display: flex;
   }
+
   .user-info > * {
     margin: 0.25em;
     place-self: center;

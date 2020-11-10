@@ -1,5 +1,4 @@
 <script>
-  import firebase from "firebase/app";
   import { onMount } from "svelte";
   import { sendMail } from "./index";
   import { getUserDoc, user } from "../firebase/index";
@@ -64,13 +63,15 @@
   }
 </style>
 
-<form on:submit|preventDefault={() => sendMail(to, subject, body)}>
-  <fieldset>
-    <legend>Send email</legend>
-    <input bind:value={to} placeholder="'to' email address" required />
-    <input bind:value={subject} placeholder="email 'subject'" required />
-    <textarea bind:value={body} rows="5" />
-    <!-- <input type="file" bind:files multiple /> -->
-    <button type="submit">Send</button>
-  </fieldset>
-</form>
+<div class="email-container">
+  <form on:submit|preventDefault={() => sendMail(to, subject, body, files)}>
+    <fieldset>
+      <legend>Send email</legend>
+      <input bind:value={to} placeholder="'to' email address" required />
+      <input bind:value={subject} placeholder="email 'subject'" required />
+      <textarea bind:value={body} rows="5" />
+      <input type="file" bind:files multiple />
+      <button type="submit">Send</button>
+    </fieldset>
+  </form>
+</div>

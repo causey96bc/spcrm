@@ -1,6 +1,6 @@
 <script>
     import GMail from "../../components/gapi/GMail.svelte";
-    import { user, getUserDoc } from "../../components/firebase/index";
+    import { user } from "../../components/firebase/index";
     import firebase from "firebase/app";
     export let id;
     const selected = id.split(",");
@@ -25,6 +25,5 @@
         <h2>{contact.name}</h2>
     {/each}
 {/await}
-
 
 <GMail {contactsPromise} />

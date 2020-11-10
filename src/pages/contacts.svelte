@@ -7,9 +7,6 @@
   let contact = { ...CONTACT };
   let contacts = [];
   let selected = [];
-  $: {
-    console.log("selected", selected.filter(Boolean));
-  }
 
   $: if ($user) {
     const userDoc = getUserDoc($user.uid);
@@ -20,6 +17,7 @@
       });
     }
   }
+
   async function submit() {
     if (contactId) {
       await contactsCollection.doc(contactId).update(contact);
@@ -29,23 +27,19 @@
     contact = { ...CONTACT };
     contactId = null;
   }
-  async function loadContact(id) {
-    const userDoc = await getUserDoc($user.uid);
-    const snapshot = await userDoc.collection("contacts").doc(id).get();
-    contactId = snapshot.id;
-    contact = snapshot.data();
-  }
 </script>
 
 <style>
   .row {
     justify-content: space-between;
   }
+
   .divider {
     border-bottom: 1px solid #cfcfcf;
     margin-bottom: 10px;
     padding-bottom: 10px;
   }
+
   a {
     text-decoration: none;
     color: inherit;
@@ -67,6 +61,7 @@
     padding-top: 2px;
     margin-left: -85px;
   }
+
   .text {
     margin-top: 40px;
     text-align: center;
