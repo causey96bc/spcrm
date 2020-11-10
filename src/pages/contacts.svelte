@@ -59,7 +59,7 @@
   }
 
   .col-4 {
-    margin-top:28px;
+    margin-top: 28px;
   }
 
   .col-8 {
@@ -70,7 +70,6 @@
   .text {
     margin-top: 40px;
     text-align: center;
-
   }
 </style>
 
@@ -112,7 +111,7 @@
               <p>{c.details}</p>
             </div>
             <div class="col-md-3">
-              <a on:click={() => loadContact(id)}><i
+              <a href={$url('./:id/edit', { id })}><i
                   class="fas fa-user-edit" /></a>
               <a href={$url('./:id/delete', { id })}><i
                   class="far fa-trash-alt" />
@@ -120,9 +119,7 @@
             </div>
           </div>
         {:else}
-          <p class="text">
-            You have no contacts. Please add some.
-          </p>
+          <p class="text">You have no contacts. Please add some.</p>
         {/each}
       </div>
       {#if selected.length > 0}
@@ -134,54 +131,71 @@
       <!--Section heading-->
       <h2 class="h1-responsive font-weight-bold my-4">Contact submission</h2>
       <!--Section description-->
-      <p class="w-responsive mx-auto mb-5">Store important contacts here inside our CRM</p>
+      <p class="w-responsive mx-auto mb-5">
+        Store important contacts here inside our CRM
+      </p>
 
       <div class="row justify-content-space-between">
         <!--Grid column-->
         <div class="col-12">
-        <form id="contact-form"  on:submit|preventDefault={submit}  name="contact-form">
+          <form
+            id="contact-form"
+            on:submit|preventDefault={submit}
+            name="contact-form">
             <!--Grid row-->
             <div class="row">
-                <!--Grid column-->
-                <div class="col-md-6">
-                    <div class="md-form mb-0">
-                        <input bind:value={contact.name} type="text" id="name" name="name" class="form-control">
-                        <label for="name" class="">Full name</label>
-                    </div>
+              <!--Grid column-->
+              <div class="col-md-6">
+                <div class="md-form mb-0">
+                  <input
+                    bind:value={contact.name}
+                    type="text"
+                    id="name"
+                    name="name"
+                    class="form-control" />
+                  <label for="name" class="">Full name</label>
                 </div>
-                <!--Grid column-->
+              </div>
+              <!--Grid column-->
 
-                <!--Grid column-->
-                <div class="col-md-6">
-                    <div class="md-form mb-0">
-                        <input bind:value={contact.email} type="text" id="email" name="email" class="form-control">
-                        <label for="email" class=""> Email Address</label>
-                    </div>
+              <!--Grid column-->
+              <div class="col-md-6">
+                <div class="md-form mb-0">
+                  <input
+                    bind:value={contact.email}
+                    type="text"
+                    id="email"
+                    name="email"
+                    class="form-control" />
+                  <label for="email" class=""> Email Address</label>
                 </div>
-                <!--Grid column-->
-
+              </div>
+              <!--Grid column-->
             </div>
             <!--Grid row-->
 
             <!--Grid row-->
             <div class="row">
-                <div class="col-md-12">
-                    <div class="md-form mb-0">
-                        <input bind:value={contact.details} type="text" id="info" name="info" class="form-control">
-                        <label for="details" class="">Additional Information</label>
-                    </div>
+              <div class="col-md-12">
+                <div class="md-form mb-0">
+                  <input
+                    bind:value={contact.details}
+                    type="text"
+                    id="info"
+                    name="info"
+                    class="form-control" />
+                  <label for="details" class="">Additional Information</label>
                 </div>
+              </div>
             </div>
             <!--Grid row-->
 
             <!--Grid row-->
-            <div class="row">
-
-            </div>
+            <div class="row" />
             <!--Grid row-->
             <button on:submit={submit} type="submit">Save</button>
-        </form>
-    </div>
+          </form>
+        </div>
         <!--Grid column-->
 
         <!--Grid column-->

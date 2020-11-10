@@ -70,7 +70,7 @@
     <input bind:value={to} placeholder="'to' email address" required />
     <input bind:value={subject} placeholder="email 'subject'" required />
     <textarea bind:value={body} rows="5" />
-    <input type="file" bind:files multiple />
+    <!-- <input type="file" bind:files multiple /> -->
     <button type="submit">Send</button>
   </fieldset>
 </form>
