@@ -7,12 +7,12 @@
   } from "../../../components/firebase";
   const userDoc = getUserDoc();
   let files = [];
-  $: console.log("files", files);
   let contact = null;
   const contactRef = userDoc.collection("contacts").doc(id);
   contactRef.get().then((snapshot) => {
     contact = snapshot.data();
   });
+
   async function save() {
     const [file] = files;
     if (file) {

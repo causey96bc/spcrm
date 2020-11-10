@@ -1,5 +1,4 @@
 <script>
-  import { page } from "@sveltech/routify";
   import { user } from "../components/firebase";
   import Nav from "../components/Nav.svelte";
 </script>
