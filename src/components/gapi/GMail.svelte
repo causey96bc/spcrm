@@ -2,7 +2,10 @@
   import { onMount } from "svelte";
   import { sendMail } from "./index";
   import { getUserDoc, user } from "../firebase/index";
+  // import { contactsPromise } from "../../pages/email/[id].svelte"
+  import i from "./index";
   export let files = [];
+
   const userDoc = getUserDoc($user.uid);
   const contactRef = userDoc.collection("contacts").doc("vq45VImmyOXxOodx3VmF");
   async function getContact() {
@@ -11,11 +14,13 @@
     return contact;
   }
 
-  let to = "",
+  let to = '',
     subject = "test 1",
     body = "line 1\nline 2";
+  import firebaseConfig from "../firebase/config";
 
   onMount(async () => {
+    await i(firebaseConfig.apiKey, firebaseConfig.clientId);
     await getContact();
   });
 </script>

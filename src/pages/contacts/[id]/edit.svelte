@@ -28,6 +28,7 @@
 </style>
 
 <!-- routify:options title="Edit Contact" -->
+<!-- Comment out -->
 
 {#if contact}
   <form on:submit|preventDefault={save}>

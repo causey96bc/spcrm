@@ -1,8 +1,9 @@
 //  Imports firebase configuration that provides user Auth that is required
 //  to utilize Gmail API 
+
 import firebaseConfig from "../firebase/config";
 init(firebaseConfig.apiKey, firebaseConfig.clientId);
-console.log("hello")
+console.log("hello");
 export default async function init(apiKey, clientId) {
   // API endpoint for gmail that allows for email sending
   const DISCOVERY_DOCS = [
@@ -24,6 +25,7 @@ export default async function init(apiKey, clientId) {
     });
   });
 }
+
 
 //  Gets a Gapi instance and constructs a multipart message utilizing to, subject, body, files that comes as an array[]
 //  We have to format the message using rfc-822 standards  by setting a boundary and encoding the attachment.
@@ -47,6 +49,7 @@ ${body}
 ${encodedAttachments.map(a => `--${boundary}\n${a}`).join('\n')}
 --${boundary}--`;
   const encodedMessage = btoa(message);
+
   const urlSafeEncodedMessage = encodedMessage
     .replace(/\+/g, "-")
     .replace(/\//g, "_")
@@ -55,10 +58,13 @@ ${encodedAttachments.map(a => `--${boundary}\n${a}`).join('\n')}
     userId: "me",
     resource: {
       raw: urlSafeEncodedMessage,
+      payload: {},
+
     },
   });
   console.log("send", send);
 }
+
 //  This function encodes the attached file into a base64.
 async function encodeAttachment(file) {
   const b64 = await base64(file);
@@ -68,6 +74,7 @@ Content-Type: ${file.type}; name=${file.name}
 
   ${b64}`
 }
+
 //  This function asynchronously read the contents of the files, creates a new promise that resolves based on the filereaders output.
 //  If the reader receives the dataURL, then it will return the results of the promised, based of the dataURL.
 async function base64(file) {
@@ -78,4 +85,3 @@ async function base64(file) {
     reader.readAsDataURL(file);
   })
   return result.replace(/^data:.*;base64,/, "");
-}
