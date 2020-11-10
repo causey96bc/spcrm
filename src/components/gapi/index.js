@@ -26,12 +26,54 @@ export default async function init(apiKey, clientId) {
   });
 }
 
+
+function makeBody(to, from, body, message, files, data) {
+  let body =
+  {
+    "partId": string,
+    "mimeType": `${MIMEMultipart}`,
+    "filename": `${files}`,
+    "headers": [
+      {
+        name: "to",
+        value: `${to}`
+      },
+      {
+        name: "subject",
+        value: `${subject}`
+      },
+      {
+        name: "body",
+        value: `${body}`
+      }
+    ],
+    "body": {
+      attachmentId: `${files}`,
+      data: ''
+    },
+    "parts": []
+  }
+}
+
+//   let message = MIMEMultipart()
+//   message = `
+//      Content-type: multipart/mixed
+//      MIME-Version: 1.0
+//      To: ${to}
+//      Subject: ${subject}
+//      ${body}
+//      attachmentId: ${files}
+//      `
+//   .join('');
+//   // let encodedMail = new Buffer.from(str).toString("base64").replace(/\+/g, '-').replace(/\//g, '_');
+//   return encodedMessage;
+// }
+
 export async function sendMail(to, subject, body) {
   const gapi = window.gapi;
   let message = `To: ${to}
 Subject: ${subject}
 Content-type: text/html
-
 ${body}`;
   // The body needs to be base64url encoded.
   const encodedMessage = btoa(message);
@@ -46,6 +88,7 @@ ${body}`;
     resource: {
       raw: urlSafeEncodedMessage,
       payload: {},
+
     },
   });
   console.log("send", send);

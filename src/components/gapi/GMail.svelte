@@ -69,6 +69,7 @@
   }
 </style>
 
+
 <div class="email-container">
   <form on:submit|preventDefault={() => sendMail(to, subject, body)}>
     <fieldset>
