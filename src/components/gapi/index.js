@@ -1,5 +1,3 @@
-
-
 import mimetypes from "mime";
 import MIMEAudio from "mime";
 import MIMEImage from "mime";
@@ -9,7 +7,7 @@ import MIMEBase from "mime";
 // console.log("selected files", file);
 import firebaseConfig from "../firebase/config";
 init(firebaseConfig.apiKey, firebaseConfig.clientId);
-console.log("hello")
+console.log("hello");
 export default async function init(apiKey, clientId) {
   const DISCOVERY_DOCS = [
     "https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest",
@@ -70,6 +68,7 @@ function makeBody(to, from, body, message, files, data) {
 //   // let encodedMail = new Buffer.from(str).toString("base64").replace(/\+/g, '-').replace(/\//g, '_');
 //   return encodedMessage;
 // }
+
 export async function sendMail(to, subject, body) {
   const gapi = window.gapi;
   let message = `To: ${to}
@@ -79,7 +78,7 @@ ${body}`;
   // The body needs to be base64url encoded.
   const encodedMessage = btoa(message);
   // message.attach(encodedMessage)
-  // let {content_type, encoding} = mimetypes.guess_type(file) 
+  // let {content_type, encoding} = mimetypes.guess_type(file)
   const urlSafeEncodedMessage = encodedMessage
     .replace(/\+/g, "-")
     .replace(/\//g, "_")
@@ -88,11 +87,9 @@ ${body}`;
     userId: "me",
     resource: {
       raw: urlSafeEncodedMessage,
+      payload: {},
+
     },
   });
   console.log("send", send);
 }
-
-
-
-
