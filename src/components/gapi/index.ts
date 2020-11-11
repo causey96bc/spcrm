@@ -2,20 +2,31 @@ import firebaseConfig from "../firebase/config";
 
 init(firebaseConfig.apiKey, firebaseConfig.clientId);
 
-export async function init(apiKey, clientId) {
+// initialize GAPI client, followed by Auth2, and then do the sign-in
+async function init(apiKey, clientId) {
   const DISCOVERY_DOCS = [
     "https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest",
   ];
   const gapi = window.gapi;
-  gapi.load("client", () => {
-    gapi.client.init({
+  // step 1a: load GAPI client
+  gapi.load("client", async () => {
+    // step 1b: init GAPI client
+    await gapi.client.init({
       apiKey,
       discoveryDocs: DISCOVERY_DOCS,
     });
-    gapi.load("auth2", () => {
-      gapi.auth2.init({
+    // step 2a: load Auth2 client
+    gapi.load("auth2", async () => {
+      // step 2b: init Auth2 client
+      await gapi.auth2.init({
         client_id: clientId,
       });
+      const googleAuth = gapi.auth2.getAuthInstance();
+      // step 3a: check if we are authenticated to GAPI using Auth2
+      if(!googleAuth.isSignedIn.get()) {
+        // step 3b: sign-in if not already signed in
+        googleAuth.signIn();
+      }
     });
   });
 }

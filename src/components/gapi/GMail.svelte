@@ -4,12 +4,6 @@
   let to = "",
     subject = "test 1",
     body = "line 1\nline 2";
-  import { init } from "./index";
-  import firebaseConfig from "../firebase/config";
-
-  onMount(async () => {
-    await init(firebaseConfig.apiKey, firebaseConfig.clientId);
-  });
 </script>
 
 <style>
