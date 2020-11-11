@@ -7,10 +7,11 @@
   let contact = { ...CONTACT };
   let contacts = [];
   let selected = [];
-
+  let userDoc;
+  let contactsCollection;
   $: if ($user) {
-    const userDoc = getUserDoc($user.uid);
-    const contactsCollection = userDoc.collection("contacts");
+    userDoc = getUserDoc($user.uid);
+    contactsCollection = userDoc.collection("contacts");
     if (contactsCollection) {
       contactsCollection.onSnapshot((snapshot) => {
         contacts = snapshot.docs.map((doc) => [doc.id, doc.data()]);
@@ -107,9 +108,9 @@
             </div>
             <div class="col-md-3">
               <a href={$url('./:id/edit', { id })}><i
-                  class="fas fa-user-edit" /></a>
+                  class="material-icons">edit</i></a>
               <a href={$url('./:id/delete', { id })}><i
-                  class="far fa-trash-alt" />
+                  class="material-icons">delete</i>
               </a>
             </div>
           </div>
