@@ -1,18 +1,6 @@
 <script>
-  import { onMount } from "svelte";
   import { sendMail } from "./index";
-  import { getUserDoc, user } from "../firebase/index";
-  // import { contactsPromise } from "../../pages/email/[id].svelte"
-  import i from "./index";
   export let files = [];
-
-  const userDoc = getUserDoc($user.uid);
-  const contactRef = userDoc.collection("contacts").doc("vq45VImmyOXxOodx3VmF");
-  async function getContact() {
-    const snapshot = await contactRef.get();
-    const contact = snapshot.data();
-    return contact;
-  }
 
   let to = "",
     subject = "test 1",
