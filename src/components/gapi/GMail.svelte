@@ -1,6 +1,7 @@
 <script>
   import { sendMail } from "./index";
-  export let files = [];
+  export let contacts;
+  let files = [];
 
   let to = "",
     subject = "test 1",
@@ -51,10 +52,12 @@
 </style>
 
 <div class="email-container">
-  <form on:submit|preventDefault={() => sendMail(to, subject, body, files)}>
+  <form
+    on:submit|preventDefault={() => contacts.forEach((c) =>
+        sendMail(c.email, subject, body, files)
+      )}>
     <fieldset>
       <legend>Send email</legend>
-      <input bind:value={to} placeholder="'to' email address" required />
       <input bind:value={subject} placeholder="email 'subject'" required />
       <textarea bind:value={body} rows="5" />
       <input type="file" bind:files multiple />
