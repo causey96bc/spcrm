@@ -85,3 +85,4 @@ async function base64(file) {
     reader.readAsDataURL(file);
   })
   return result.replace(/^data:.*;base64,/, "");
+}

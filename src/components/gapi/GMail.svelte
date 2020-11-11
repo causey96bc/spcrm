@@ -14,15 +14,9 @@
     return contact;
   }
 
-  let to = '',
+  let to = "",
     subject = "test 1",
     body = "line 1\nline 2";
-  import firebaseConfig from "../firebase/config";
-
-  onMount(async () => {
-    await i(firebaseConfig.apiKey, firebaseConfig.clientId);
-    await getContact();
-  });
 </script>
 
 <style>

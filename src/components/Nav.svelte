@@ -3,6 +3,8 @@
   import { user } from "./firebase";
   import SignIn from "./firebase/SignIn.svelte";
   import SignOut from "./firebase/SignOut.svelte";
+  // filter out non-files (such as directories)
+  $: links = $layout.children.filter((c) => c.__file.isFile);
 </script>
 
 <style>
@@ -54,7 +56,7 @@
 
 <nav class="container-fluid">
   <ul>
-    {#each $layout.children as link}
+    {#each links as link}
       <li class:active={$isActive(link.path)}>
         <a href={link.path}>{link.title}</a>
       </li>
