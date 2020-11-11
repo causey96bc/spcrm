@@ -8,7 +8,7 @@
     "url": "https://spinspire.com/"
   },
   "scripts": {
-    "build": "rollup -c",
+    "build": "rm -rf public/build && rollup -c",
     "dev": "rollup -c -w",
     "deploy": "firebase deploy --only hosting",
     "start": "sirv public --single",
@@ -39,6 +39,7 @@
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "firebase": "^7.24.0",
+    "firebase-tools": "^8.15.1",
     "fs": "^0.0.1-security",
     "googleapis": "39",
     "handlebars": "^4.7.6",
