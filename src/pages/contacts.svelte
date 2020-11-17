@@ -266,9 +266,9 @@
               <div class="row" />
               <!--Grid row -->
             </div>
+            <button on:submit={submit} type="submit"><i
+                class="material-icons">person_add</i>Add Contact</button>
           </form>
-          <button on:submit={submit} type="submit"><i
-              class="material-icons">person_add</i>Add Contact</button>
         </div>
       </div>
     </section>
