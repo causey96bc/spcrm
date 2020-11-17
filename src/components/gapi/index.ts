@@ -2,7 +2,7 @@
 //  to utilize Gmail API 
 
 import firebaseConfig from "../firebase/config";
-
+import mustache from "mustache";
 init(firebaseConfig.apiKey, firebaseConfig.clientId);
 
 // initialize GAPI client, followed by Auth2, and then do the sign-in
@@ -41,19 +41,23 @@ async function init(apiKey, clientId) {
 //  Each attachment is then mapped with a boundary through encodedAttachments.
 //  After this we then concatinate the encoded file into a string. 
 //  Once the mesage and the attachment is encoded properly, we then use gapi.gmail.send to send the multipart message through the web.
-export async function sendMail(to, subject, body, files) {
+export async function sendMail(contact, subject, body, files) {
+  const to = contact.email;
+  const renderedSubject = mustache.render(subject, {contact});
+  const renderedBody = mustache.render(body, {contact});
+  
   files = Array.from(files)
   const gapi = window.gapi;
   const encodedAttachments = await Promise.all(files.map(encodeAttachment));
   const boundary = "my-boundary-asdfb";
   let message = `To: ${to}
-Subject: ${subject}
+Subject: ${renderedSubject}
 Content-Type: multipart/mixed; boundary=${boundary}
 
 --${boundary}
 Content-Type: text/html
 
-${body}
+<pre>${renderedBody}</pre>
 ${encodedAttachments.map(a => `--${boundary}\n${a}`).join('\n')}
 --${boundary}--`;
   const encodedMessage = btoa(message);

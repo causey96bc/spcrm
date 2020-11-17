@@ -1,11 +1,23 @@
 <script>
   import { sendMail } from "./index";
+  import mustache from "mustache";
   export let contacts;
-  let files = [];
 
-  let to = "",
-    subject = "test 1",
-    body = "line 1\nline 2";
+  let files = [];
+  let renderedSubject, renderedBody;
+  let subject = "test email to {{contact.name}}";
+  let body = `hello {{contact.name}},
+  
+  line1  
+  line2
+  
+  thanks.`;
+
+  $: {
+    const [contact] = contacts;
+    renderedSubject = mustache.render(subject, { contact });
+    renderedBody = mustache.render(body, { contact });
+  }
 </script>
 
 <style>
@@ -54,7 +66,7 @@
 <div class="email-container">
   <form
     on:submit|preventDefault={() => contacts.forEach((c) =>
-        sendMail(c.email, subject, body, files)
+        sendMail(c, subject, body, files)
       )}>
     <fieldset>
       <legend>Send email</legend>
@@ -65,3 +77,6 @@
     </fieldset>
   </form>
 </div>
+
+<pre>{renderedSubject}</pre>
+<pre>{renderedBody}</pre>
