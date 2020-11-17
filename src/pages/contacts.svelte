@@ -1,22 +1,13 @@
 <script>
   import { url } from "@sveltech/routify";
-  import { getUserDoc, user, getContactPicture } from "../components/firebase";
+  import { getUserDoc, user } from "../components/firebase";
   export let id;
-  export const CONTACT = {
-    name: "",
-    email: "",
-    details: "",
-    city: "",
-    state: "",
-    zipcode: "",
-    phone: "",
-  };
+  export const CONTACT = { name: "", email: "", details: "" };
   let contactId = null;
   let contact = { ...CONTACT };
   let contacts = [];
   let selected = [];
   let userDoc;
-
   let contactsCollection;
   $: if ($user) {
     userDoc = getUserDoc($user.uid);
@@ -62,10 +53,6 @@
     margin-top: 30px;
   }
 
-  .col-md-3 {
-    text-align: center;
-    margin: auto;
-  }
   .col-4 {
     margin-top: 28px;
   }
@@ -80,15 +67,6 @@
     margin-top: 40px;
     text-align: center;
   }
-
-  img {
-    max-width: 100px;
-    max-height: 100px;
-  }
-
-  button {
-    margin-top: 2rem;
-  }
 </style>
 
 <!-- routify:options index=2 -->
@@ -98,37 +76,39 @@
     <section class="col-8">
       <div>
         <h2>My Current contacts</h2>
+
         <div class="row">
-          <input bind:value={selected} type="checkbox" />
-          <div class="col-md-3">
-            <h6>Photo</h6>
-          </div>
           <div class="col-md-3">
             <div class="">
+              <input bind:value={selected} type="checkbox" />
               <h6 class="d-inline-block ml-2">Name</h6>
             </div>
           </div>
           <div class="col-md-3">
             <h6>Email</h6>
           </div>
+          <div class="col-md-3">
+            <h6>Info</h6>
+          </div>
+          <div class="col-md-3">
+            <p>Actions</p>
+          </div>
         </div>
         {#each contacts as [id, c] (id)}
           <div class="row divider">
-            <input type="checkbox" bind:group={selected} value={id} />
             <div class="col-md-3">
-              {#await getContactPicture(id) then url}
-                <img src={url} alt="contact picture" class="img-fluid" />
-              {/await}
-            </div>
-            <div class="col-md-3">
+              <input type="checkbox" bind:group={selected} value={id} />
               <p class="d-inline-block ml-2">{c.name}</p>
             </div>
             <div class="col-md-3">
               <p>{c.email}</p>
             </div>
             <div class="col-md-3">
+              <p>{c.details}</p>
+            </div>
+            <div class="col-md-3">
               <a href={$url('./:id/edit', { id })}><i
-                  class="material-icons">account_circle</i></a>
+                  class="material-icons">edit</i></a>
               <a href={$url('./:id/delete', { id })}><i
                   class="material-icons">delete</i>
               </a>
@@ -142,6 +122,7 @@
         <a href={`./email/${selected.join(',')}`}>Send email</a>
       {/if}
     </section>
+
     <section class="col-4">
       <!--Section heading-->
       <h2 class="h1-responsive font-weight-bold my-4">Contact submission</h2>
@@ -149,6 +130,7 @@
       <p class="w-responsive mx-auto mb-5">
         Store important contacts here inside our CRM
       </p>
+
       <div class="row justify-content-space-between">
         <!--Grid column-->
         <div class="col-12">
@@ -171,6 +153,7 @@
                 </div>
               </div>
               <!--Grid column-->
+
               <!--Grid column-->
               <div class="col-md-6">
                 <div class="md-form mb-0">
@@ -189,88 +172,33 @@
 
             <!--Grid row-->
             <div class="row">
-              <!--Grid column-->
-              <div class="col-md-5">
+              <div class="col-md-12">
                 <div class="md-form mb-0">
                   <input
-                    bind:value={contact.city}
+                    bind:value={contact.details}
                     type="text"
-                    id="city"
-                    name="city"
+                    id="info"
+                    name="info"
                     class="form-control" />
-                  <label for="city" class="">City</label>
+                  <label for="details" class="">Additional Information</label>
                 </div>
               </div>
-              <!--Grid column-->
-              <!--Grid column-->
-              <div class="col-md-3">
-                <div class="md-form mb-0">
-                  <input
-                    bind:value={contact.state}
-                    type="text"
-                    id="state"
-                    name="state"
-                    class="form-control" />
-                  <label for="state" class="">State</label>
-                </div>
-              </div>
-              <!--Grid column-->
-              <!--Grid column-->
-              <div class="col-md-4">
-                <div class="md-form mb-0">
-                  <input
-                    bind:value={contact.zipcode}
-                    type="text"
-                    id="zipcode"
-                    name="zipcode"
-                    class="form-control" />
-                  <label for="zipcode" class=""> Zipcode</label>
-                </div>
-              </div>
-              <!--Grid column-->
-              <!--Grid row-->
-
-              <!--Grid row-->
-              <div class="row">
-                <!--Grid column-->
-                <div class="col-md-6">
-                  <div class="md-form mb-0">
-                    <input
-                      bind:value={contact.phone}
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      class="form-control" />
-                    <label for="phone" class="">Phone Number</label>
-                  </div>
-                </div>
-                <!--Grid column-->
-
-                <!--Grid column-->
-                <div class="col-md-6">
-                  <div class="md-form mb-0">
-                    <input
-                      bind:value={contact.details}
-                      type="text"
-                      id="info"
-                      name="info"
-                      class="form-control" />
-                    <label for="details" class=""> Additional Info</label>
-                  </div>
-                </div>
-                <!--Grid column-->
-              </div>
-              <!--Grid row-->
-
-              <!-- Grid row-->
-              <div class="row" />
-              <!--Grid row -->
             </div>
+            <!--Grid row-->
+
+            <!--Grid row-->
+            <div class="row" />
+            <!--Grid row-->
+            <button on:submit={submit}type="submit">Save</button>
           </form>
-          <button on:submit={submit} type="submit"><i
-              class="material-icons">person_add</i>Add Contact</button>
         </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+
+        <!--Grid column-->
       </div>
     </section>
   </div>
 </div>
+
