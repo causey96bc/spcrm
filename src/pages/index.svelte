@@ -1,10 +1,6 @@
 <!-- routify:options index=1 -->
 <script>
-  import Mustache from "mustache";
-  const template = `foo: {{foo}}
-bar: {{bar}}`;
-  const output = Mustache.render(template, { foo: "xxx", bar: 5 });
-  console.log("output", output);
+  import QrCode from "svelte-qrcode";
 </script>
 
 <style>
@@ -25,4 +21,7 @@ bar: {{bar}}`;
     alt="SpinSpire logo" />
   <h3>Welcome</h3>
   <p>This is a CRM application. Please sign-in to use features.</p>
+  <div class="qrcode">
+    <QrCode value="https://spinspire.com/" />
+  </div>
 </div>
