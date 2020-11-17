@@ -189,7 +189,7 @@
             <!--Grid row-->
             <div class="row" />
             <!--Grid row-->
-            <button on:submit={submit} type="submit">Save</button>
+            <button on:submit={submit}type="submit">Save</button>
           </form>
         </div>
         <!--Grid column-->
