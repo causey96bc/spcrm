@@ -4625,6 +4625,11 @@ pupa@^2.0.1:
   dependencies:
     escape-goat "^2.0.0"
 
+qrious@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/qrious/-/qrious-4.0.2.tgz#09c4d4079d2b961617f62c69cff3b9bb66a39693"
+  integrity sha512-xWPJIrK1zu5Ypn898fBp8RHkT/9ibquV2Kv24S/JY9VYEhMBMKur1gHVsOiNUh7PHP9uCgejjpZUHUIXXKoU/g==
+
 qs@6.7.0:
   version "6.7.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
@@ -5550,6 +5555,13 @@ svelte-preprocess@~4.3.0:
     "@types/sass" "^1.16.0"
     detect-indent "^6.0.0"
     strip-indent "^3.0.0"
+
+svelte-qrcode@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/svelte-qrcode/-/svelte-qrcode-0.0.2.tgz#d69d496d69c142ac9b39c35d57f432f6cdf741db"
+  integrity sha512-jf+7Spl4dS+MFh1gyD/lvm+kzhCfmMteEYThblIiM0LO8VQfUYXhOJM6rHh1/ni32boRdGRuC/bTQKlInSfvUg==
+  dependencies:
+    qrious "^4.0.2"
 
 svelte2tsx@*:
   version "0.1.125"
