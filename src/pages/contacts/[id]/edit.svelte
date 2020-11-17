@@ -8,19 +8,16 @@
   const userDoc = getUserDoc();
   let files = [];
   let contact = null;
-
   const contactRef = userDoc.collection("contacts").doc(id);
   contactRef.get().then((snapshot) => {
     contact = snapshot.data();
   });
-
   async function save() {
     const [file] = files;
     if (file) {
       await uploadContactPicture(id, file);
       contact.picture = true;
     }
-
     await contactRef.set(contact);
     history.back();
   }
@@ -66,7 +63,6 @@
     </div>
   </form>
 {/if}
-
 {#if contact}
   <form on:submit|preventDefault={save}>
     <div class="col-md-4">
