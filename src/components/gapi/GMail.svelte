@@ -50,7 +50,14 @@
   p {
     margin-top: 12px;
   }
-
+  .sample-email {
+    margin-top: 20px;
+    border-radius: 5%;
+    width: 500px;
+    height: 500px;
+    padding: 10px;
+    box-shadow: 5px 6px 6px 6px #888888;
+  }
   button {
     margin: auto;
     margin-top: 12px;
@@ -77,6 +84,8 @@
     </fieldset>
   </form>
 </div>
-
-<pre>{renderedSubject}</pre>
-<pre>{renderedBody}</pre>
+<div class="sample-email container-fluid">
+  <h3>Sample Email.</h3>
+  <pre>{renderedSubject}</pre>
+  <pre>{renderedBody}</pre>
+</div>
