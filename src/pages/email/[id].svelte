@@ -23,8 +23,7 @@
 
 <!-- routify:options title="Emails" -->
 <!-- routify:options index=3 -->
-{#each contacts as contact}
-  <h2>{contact.email}</h2>
-{/each}
+<!-- svelte-ignore empty-block -->
+{#each contacts as contact}{/each}
 
 <GMail {contacts} />

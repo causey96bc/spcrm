@@ -1,7 +1,14 @@
 <script>
   import QrScanner from "qr-scanner";
   import { onMount } from "svelte";
+  import { user, getUserDoc } from "../components/firebase";
+  let userDoc;
+  let contacts = [];
+  let contactsCollection;
+  userDoc = getUserDoc($user.uid);
+  contactsCollection = userDoc.collection("contacts");
   let qron = false;
+  let CONTACT;
   $: if (qrscanner) {
     if (qron) {
       console.log("started scanning");
@@ -12,12 +19,17 @@
     }
   }
   let video, qrscanner;
+
   onMount(() => {
     qron = true;
-    qrscanner = new QrScanner(video, (result) => {
+    qrscanner = new QrScanner(video, async (result) => {
       if (result) {
         console.log("result", result);
         qron = false;
+        result = contact;
+      }
+      if (contact) {
+        await contactsCollection.add(contact);
       }
     });
   });
