@@ -79,7 +79,7 @@
     </div>
     <div class="col-md-4">
       <input bind:value={contact.details} class="form-control" />
-      <label for="name" class="">Information</label>
+      <label for="name" class="">Company Name</label>
     </div>
     <button class="btn btn-primary">
       <i class="material-icons">save</i>Save</button>

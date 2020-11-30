@@ -242,7 +242,7 @@
                       id="info"
                       name="info"
                       class="form-control" />
-                    <label for="details" class=""> Additional Info</label>
+                    <label for="details" class=""> Company Name</label>
                   </div>
                 </div>
                 <!--Grid column-->
