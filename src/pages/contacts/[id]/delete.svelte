@@ -16,7 +16,7 @@
   }
 </script>
 
-<h3>Are you sure you wish to delete this contact{contact}</h3>
+<h3>Are you sure you wish to delete:</h3>
 {#await getContact() then contact}
   <h2>{contact.name}</h2>
 {/await}
